@@ -37,6 +37,26 @@ function handleClickStart(e){
     }
 }
 
+// check if won
+function checkForWin(player){
+    for(let i = 0; i<win.length; i++){
+        if(board[win[i][0]] == player && board[win[i][1]] == player && board[win[i][2]] == player){
+            return true;
+        }
+    }
+    return false
+}
+
+// check if draw
+function checkForDraw(){
+    for(let i = 0; i<board.length; i++){
+        if(board[i] === ""){
+            return False
+        }
+    }
+    return True
+}
+
 
 
 
