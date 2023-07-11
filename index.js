@@ -35,6 +35,13 @@ function handleClickStart(e){
         console.log(clickedDiv.innerText)
         board[parseInt(divId)] = currentPlayer;
     }
+    if(checkForWin(currentPlayer)){
+        updateScore(currentPlayer);
+        resetBoard();
+    }
+    if(checkForDraw){
+        resetBoard();
+    }
 }
 
 // check if won
@@ -55,6 +62,20 @@ function checkForDraw(){
         }
     }
     return True
+}
+// update score
+
+function updateScore(player){
+    score = document.getElementById("score"+player)
+        score.innerText = parseInt(score.innerText)+1
+}
+
+// resetBoard
+
+function resetBoard(){
+    for(let i = 0; i<board.length; i++){
+        board[i] = ""
+    }
 }
 
 
