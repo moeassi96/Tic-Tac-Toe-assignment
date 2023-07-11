@@ -1,7 +1,6 @@
 let player1Score = 0;
 let player2Score = 0;
-let currentPlayer = "X";
-let board = ["", "", "", "", "", "", "", "", ""];
+
 
 let win = [
   [0, 1, 2],
@@ -18,8 +17,10 @@ let startBtn = document.getElementById("start-btn");
 let resetBtn = document.getElementById("reset-btn");
 
 startBtn.addEventListener("click", handleStart);
-resetBtn.addEventListener("click", handleReset);
+// resetBtn.addEventListener("click", handleReset);
 
+let currentPlayer = "X";
+let board = ["", "", "", "", "", "", "", "", ""];
 
 function handleStart(){
     let gameboard = document.getElementById("game-board");
@@ -27,22 +28,25 @@ function handleStart(){
 }
 function handleClickStart(e){
     let clickedDiv = e.target;
-    let divId = clickedDiv.id;
+    let divId = parseInt(clickedDiv.id); // Parse the divId as an integer
 
-    if(board[divId] === ""){
-        
+    if (board[divId] === "") {
         clickedDiv.innerText = currentPlayer;
-        console.log(clickedDiv.innerText)
-        board[parseInt(divId)] = currentPlayer;
+        board[divId] = currentPlayer;
+        console.log(board);
     }
     if(checkForWin(currentPlayer)){
         updateScore(currentPlayer);
         resetBoard();
+        console.log("hidddd")
     }
-    if(checkForDraw){
+    if(checkForDraw()){
         resetBoard();
     }
-}
+    currentPlayer = (currentPlayer === "X") ? "O" : "X"
+    console.log(currentPlayer)
+    }
+    
 
 // check if won
 function checkForWin(player){
@@ -58,24 +62,25 @@ function checkForWin(player){
 function checkForDraw(){
     for(let i = 0; i<board.length; i++){
         if(board[i] === ""){
-            return False
+            return false
         }
     }
-    return True
+    return true
 }
 // update score
-
 function updateScore(player){
-    score = document.getElementById("score"+player)
-        score.innerText = parseInt(score.innerText)+1
+    let score = document.getElementById("score" + player);
+    console.log(score);
+    score.innerText = parseInt(score.innerText) + 1;
 }
-
 // resetBoard
 
 function resetBoard(){
+    board = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X"
     for(let i = 0; i<board.length; i++){
-        board[i] = ""
-    }
+        document.getElementById(String(i)).innerText = ""
+    }   
 }
 
 
