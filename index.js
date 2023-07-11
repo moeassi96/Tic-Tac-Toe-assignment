@@ -1,6 +1,6 @@
 let player1Score = 0;
 let player2Score = 0;
-
+round = 0
 
 let win = [
   [0, 1, 2],
@@ -26,6 +26,14 @@ let board = ["", "", "", "", "", "", "", "", ""];
 function handleStart(){
     let gameboard = document.getElementById("game-board");
     gameboard.addEventListener("click", handleClickStart)
+
+    let playerXName = document.getElementById("PlayerX-name").value;
+    let playerOName = document.getElementById("PlayerO-name").value;
+
+    document.getElementById("name-X").innerText = playerXName
+    document.getElementById("name-O").innerText = playerOName
+    document.getElementById("scoreX").innerText = 0
+    document.getElementById("scoreO").innerText = 0
 }
 function handleClickStart(e){
     let clickedDiv = e.target;
@@ -36,6 +44,7 @@ function handleClickStart(e){
         board[divId] = currentPlayer;
     }
     if(checkForWin(currentPlayer)){
+        round++;
         updateScore(currentPlayer);
         resetBoard();
         return
@@ -68,6 +77,8 @@ function updateScore(player){
     let score = document.getElementById("score" + player);
     console.log(score);
     score.innerText = parseInt(score.innerText) + 1;
+    nameOfWinner = document.getElementById("name-"+player).innerText
+    document.getElementById("update-text").innerText = nameOfWinner+ " won round " + round
 }
 // resetBoard
 function resetBoard(){
@@ -85,10 +96,7 @@ function handleReset(){
     document.getElementById("scoreO").innerText = 0
     board = board = ["", "", "", "", "", "", "", "", ""];
     currentPlayer = "X";
+    document.getElementById("update-text").innerText = "Good luck !!"
+    round = 0
     resetBoard();
 }
-
-
-
-
-
