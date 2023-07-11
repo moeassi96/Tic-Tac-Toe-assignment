@@ -17,10 +17,11 @@ let startBtn = document.getElementById("start-btn");
 let resetBtn = document.getElementById("reset-btn");
 
 startBtn.addEventListener("click", handleStart);
-// resetBtn.addEventListener("click", handleReset);
+resetBtn.addEventListener("click", handleReset);
 
 let currentPlayer = "X";
 let board = ["", "", "", "", "", "", "", "", ""];
+
 
 function handleStart(){
     let gameboard = document.getElementById("game-board");
@@ -28,26 +29,22 @@ function handleStart(){
 }
 function handleClickStart(e){
     let clickedDiv = e.target;
-    let divId = parseInt(clickedDiv.id); // Parse the divId as an integer
+    let divId = parseInt(clickedDiv.id);
 
     if (board[divId] === "") {
         clickedDiv.innerText = currentPlayer;
         board[divId] = currentPlayer;
-        console.log(board);
     }
     if(checkForWin(currentPlayer)){
         updateScore(currentPlayer);
         resetBoard();
-        console.log("hidddd")
+        return
     }
     if(checkForDraw()){
         resetBoard();
     }
     currentPlayer = (currentPlayer === "X") ? "O" : "X"
-    console.log(currentPlayer)
     }
-    
-
 // check if won
 function checkForWin(player){
     for(let i = 0; i<win.length; i++){
@@ -57,7 +54,6 @@ function checkForWin(player){
     }
     return false
 }
-
 // check if draw
 function checkForDraw(){
     for(let i = 0; i<board.length; i++){
@@ -74,13 +70,22 @@ function updateScore(player){
     score.innerText = parseInt(score.innerText) + 1;
 }
 // resetBoard
-
 function resetBoard(){
     board = ["", "", "", "", "", "", "", "", ""];
     currentPlayer = "X"
     for(let i = 0; i<board.length; i++){
         document.getElementById(String(i)).innerText = ""
     }   
+}
+
+function handleReset(){
+    player1Score = 0;
+    player2Score = 0;
+    document.getElementById("scoreX").innerText = 0
+    document.getElementById("scoreO").innerText = 0
+    board = board = ["", "", "", "", "", "", "", "", ""];
+    currentPlayer = "X";
+    resetBoard();
 }
 
 
