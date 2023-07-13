@@ -43,14 +43,17 @@ function handleClickStart(e){
         clickedDiv.innerText = currentPlayer;
         board[divId] = currentPlayer;
     }
-    if(checkForWin(currentPlayer)){
+    if (checkForWin(currentPlayer)) {
         round++;
-        updateScore(currentPlayer);
-        resetBoard();
-        return
-    }
+        setTimeout(function() {
+          updateScore(currentPlayer);
+          resetBoard();
+        }, 3000);
+        return;
+      }
     if(checkForDraw()){
         resetBoard();
+        return
     }
     currentPlayer = (currentPlayer === "X") ? "O" : "X"
     }
@@ -58,6 +61,7 @@ function handleClickStart(e){
 function checkForWin(player){
     for(let i = 0; i<win.length; i++){
         if(board[win[i][0]] == player && board[win[i][1]] == player && board[win[i][2]] == player){
+            strikeThrough(i);
             return true;
         }
     }
@@ -75,7 +79,6 @@ function checkForDraw(){
 // update score
 function updateScore(player){
     let score = document.getElementById("score" + player);
-    console.log(score);
     score.innerText = parseInt(score.innerText) + 1;
     nameOfWinner = document.getElementById("name-"+player).innerText
     document.getElementById("update-text").innerText = nameOfWinner+ " won round " + round
@@ -89,6 +92,32 @@ function resetBoard(){
     }   
 }
 
+function strikeThrough(cells) {
+    if (JSON.stringify(win[cells]) === JSON.stringify([0, 4, 8])) {
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(JSON.stringify(win[cells][i])).innerHTML =
+          currentPlayer + ' <div class="diagonal"></div>';
+      }
+    } else if (JSON.stringify(win[cells]) === JSON.stringify([2, 4, 6])){
+        for (let i = 0; i < 3; i++) {
+            document.getElementById(JSON.stringify(win[cells][i])).innerHTML =
+              currentPlayer + ' <div class="reverse-diagonal"></div>';
+          }
+    }
+    else if ((JSON.stringify(win[cells]) === JSON.stringify([0, 1, 2])) || (JSON.stringify(win[cells]) === JSON.stringify([3, 4, 5])) || (JSON.stringify(win[cells]) === JSON.stringify([6, 7, 8]))  ){
+        for (let i = 0; i < 3; i++) {
+            document.getElementById(JSON.stringify(win[cells][i])).innerHTML =
+              currentPlayer + ' <div class="horizontal"></div>';
+          }
+    }else{
+        for (let i = 0; i < 3; i++) {
+            document.getElementById(JSON.stringify(win[cells][i])).innerHTML =
+              currentPlayer + ' <div class="vertical"></div>';
+          }
+    }
+
+
+}
 function handleReset(){
     player1Score = 0;
     player2Score = 0;
@@ -98,5 +127,11 @@ function handleReset(){
     currentPlayer = "X";
     document.getElementById("update-text").innerText = "Good luck !!"
     round = 0
+    let gameboard = document.getElementById("game-board");
+    gameboard.removeEventListener("click", handleClickStart);
+    document.getElementById("name-X").innerText = ""
+    document.getElementById("name-O").innerText = ""
+    document.getElementById("scoreX").innerText = ""
+    document.getElementById("scoreO").innerText = ""
     resetBoard();
 }
