@@ -1,134 +1,146 @@
 .cell {
-    position: relative;
-  }
+  position: relative;
+}
 
-  .diagonal {
-    position: absolute;
-    top: 0;
-    left: 0;
+.diagonal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  transform-origin: top left;
+  transform: rotate(45deg);
+  background-color: rgb(255, 255, 255);
+  animation: drawLine 1s linear forwards;
+}
+
+.reverse-diagonal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 5px;
+  transform-origin: bottom left;
+  transform: rotate(-45deg);
+  background-color: rgb(255, 255, 255);
+  animation: drawLine 1s linear forwards;
+}
+
+@keyframes drawLine {
+  0% {
     width: 0;
-    height: 5px;
-    transform-origin: top left;
-    transform: rotate(45deg) ;
-    background-color: red;
-    animation: drawLine 1s linear forwards;
   }
-  .reverse-diagonal{
-    position: absolute;
-    top: 100%;
-    left: 0;
+
+  100% {
+    width: 140px;
+  }
+}
+
+@keyframes drawLine2 {
+  0% {
     width: 0;
-    height: 5px;
-    transform-origin: bottom left;
-    transform: rotate(-45deg) ;
-    background-color: red;
-    animation: drawLine 1s linear forwards;
-}
-  @keyframes drawLine {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 140px;
-    }
-  }
-  @keyframes drawLine2 {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 100%;
-    }
   }
 
-.vertical{
-    position: absolute;
-    width: 97px;
-    height: 5px;
-    background-color: red;
-    transform: rotate(90deg) ;
-    animation: drawLine2 1s linear forwards;
-}
-.horizontal{
-    position: absolute;
-    width: 0;
-    height: 5px;
-    background-color: red;
-    animation: drawLine2 1s linear forwards;
+  100% {
+    width: 100%;
+  }
 }
 
-input{
-    border-radius: 5px;
-}
-.container{
-    padding: 50px 200px;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(204, 238, 227);
-    color: #6e6ebe;
-    font-family: sans-serif;
-}
-.page-title{
-    font-size: 100px;
-}
-.players-input-container{
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    text-align: center;
-    
-}
-.player-input{
-
-}
-#start-btn{
-    margin:20px;
-    width: 180px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: aqua;
-    color: #6e6ebe;
-    font-size: 20px;
-    font-weight: bolder;
-}
-#reset-btn{
-    width: 120px;
-    height: 30px;
-    border-radius: 20px;
-    background-color: aqua;
-    color: #6e6ebe;
-    font-size: 20px;
-    font-weight: bolder;
+.vertical {
+  position: absolute;
+  width: 97px;
+  height: 5px;
+  background-color: rgb(255, 255, 255);
+  transform: rotate(90deg);
+  animation: drawLine2 1s linear forwards;
 }
 
-
-#names{
-    display: flex;
-    gap: 50px;
-    justify-content: center;
-}
-#names > div{
-    width: 200px;
-    text-align: center;
-}
-#game-board{
-    display: flex;
-    flex-wrap: wrap;
-    width: 300px;
-    height: 300px;
-    margin-top: 50px;
+.horizontal {
+  position: absolute;
+  width: 0;
+  height: 5px;
+  background-color: rgb(255, 255, 255);
+  animation: drawLine2 1s linear forwards;
 }
 
-#game-board > div{
-    width: 96px ;
-    height: 97px;
-    border: 2px solid black;
-    background-color: aquamarine;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 120px;
+input {
+  border-radius: 5px;
+}
+
+.container {
+  padding: 50px 200px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(204, 238, 227);
+  color: #2b2b33;
+  font-family: sans-serif;
+}
+
+.page-title {
+  font-size: 100px;
+}
+
+.players-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  text-align: center;
+
+}
+
+.player-input {}
+
+#start-btn {
+  margin: 20px;
+  width: 180px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgb(222, 172, 62);
+  color: #2b2b33;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+#reset-btn {
+  width: 120px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: rgb(222, 172, 62);
+  color: #2b2b33;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+
+#names {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+#names>div {
+  width: 200px;
+  text-align: center;
+}
+
+#game-board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+}
+
+#game-board>div {
+  width: 96px;
+  height: 97px;
+  border: 2px solid black;
+  background-color: rgb(222, 172, 62);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
 }
